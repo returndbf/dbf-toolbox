@@ -6,8 +6,9 @@ import {message} from 'antd';
 import 'qweather-icons/font/qweather-icons.css'
 import "./index.css"
 import rainbowFlower from "@/assets/flowerIcon/rainbow-flower.svg"
+import WeatherContainer from "@/entrypoints/popup/weather/WeatherContainer.tsx";
 
-interface LocationData {
+export interface LocationData {
     "code": string,
     "location": Array<{
         "name": string,
@@ -44,7 +45,7 @@ interface WeatherData extends WeatherRes {
     },
 }
 
-interface DailyWeatherData {
+export interface DailyWeatherData {
     "fxDate": string,
     "sunrise": string
     "sunset": string,
@@ -117,7 +118,6 @@ const Index = () => {
 
     }
     useEffect(() => {
-
         navigator.geolocation.getCurrentPosition(function (position) {
             console.log(position, 'position')
             const {longitude, latitude} = position.coords;
@@ -156,30 +156,19 @@ const Index = () => {
     }
     return (
         <div className={'weather-container'}>
-            {/*<div>所在位置:{`${fullPosition?.location?.[0]?.adm1} - ${fullPosition?.location?.[0]?.adm2} -${fullPosition?.location?.[0]?.name}`}</div>*/}
-            {/*<div>当前天气:{weatherData?.now?.text}</div>*/}
-            {/*<div>当前温度:{weatherData?.now?.temp}</div>*/}
-            {/*<div>当前湿度:{weatherData?.now?.humidity}</div>*/}
-            {/*<div>能见度:{weatherData?.now?.vis}公里</div>*/}
-
-            {/*<i className={`qi-${weatherData?.now?.icon}`}></i>*/}
             <div className={'switch-img'} onClick={changeImg}>
                     <img className={[isThree ? 'scrolled2three-img':'scrolled2one-img',currentShowDaily === '3'?'threeDay-img':'oneDay-img'].join(' ')} style={{  width: '20px'}} src={rainbowFlower}  alt={''}/>
-
             </div>
-            <div className={'weather-cards'} >
-                <div>所在位置:{`${fullPosition?.location?.[0]?.adm1} - ${fullPosition?.location?.[0]?.adm2} -${fullPosition?.location?.[0]?.name}`}</div>
-                <div>预报日期:{weatherData?.fxDate}</div>
-                <div>温度区间:{weatherData?.tempMin}-{weatherData?.tempMax}
-                    <span>{weatherData?.textDay}<i className={`qi-${weatherData?.iconDay}`}></i></span>
-                </div>
+            {
+              isThree?<>
+                  {
+                      threeDaysWeather?.map(weatherData => {
+                          return <WeatherContainer weatherData={weatherData} fullPosition={fullPosition!}/>
+                      })
+                  }
+              </>:<WeatherContainer weatherData={weatherData!} fullPosition={fullPosition!}/>
+            }
 
-                <div>日出时间:{weatherData?.sunrise}</div>
-                <div>日落时间:{weatherData?.sunset}</div>
-                <div>月相:{weatherData?.moonPhase}<i className={`qi-${weatherData?.moonPhaseIcon}`}></i></div>
-
-                <div>紫外线强度:{weatherData?.uvIndex}</div>
-            </div>
 
         </div>
     );
