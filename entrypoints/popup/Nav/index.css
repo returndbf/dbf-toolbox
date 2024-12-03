@@ -1,0 +1,11 @@
+.nav-card{
+    transition: box-shadow 0.8s ease;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav-card:hover {
+    box-shadow: 0px 1px 12px #f4a91b;
+}
