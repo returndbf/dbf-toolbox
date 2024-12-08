@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Accordion = ({title = '', children}: Props) => {
-    const [isActive, setActive] = useState(true);
+    const [isActive, setActive] = useState(false);
     return (
         <div>
             <div className={'head'} onClick={() => setActive(!isActive)}>
@@ -17,7 +17,8 @@ const Accordion = ({title = '', children}: Props) => {
                 </div>
                 <div className={'head-title'}>{title}</div>
             </div>
-             <div className={isActive?'content':'empty'}>
+
+            <div className={[isActive?'content':'empty'].join(' ')}>
                 {children}
             </div>
         </div>

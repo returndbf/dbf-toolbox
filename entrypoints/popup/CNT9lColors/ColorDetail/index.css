@@ -4,6 +4,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards ;
+}
+@keyframes fadeIn {
+    to{
+        opacity: 1;
+    }
 }
 .detail-grid {
     display: grid;
