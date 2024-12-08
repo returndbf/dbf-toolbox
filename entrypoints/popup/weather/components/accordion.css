@@ -11,8 +11,6 @@
     font-weight: 500;
 }
 
-
-
 .panel-arrow-img {
     width: 20px;
     transition: all 0.2s ease;
@@ -31,13 +29,31 @@
 }
 
 .content {
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.3s ease; /* 使用过渡 */
+ position: relative;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+
+}
+
+@keyframes fadeIn {
+    to {
+        position: relative;
+
+        opacity: 1;
+        display: none;
+    }
 }
 
 .empty {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.3s ease; /* 使用过渡 */
+    transform: translateY(0px);
+    opacity: 1;
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+        display: none;
+    }
 }
