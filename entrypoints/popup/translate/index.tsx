@@ -1,5 +1,6 @@
 import React from 'react';
 import searchFlower from "@/assets/flowerIcon/search-flower.svg"
+import sunFlower from "@/assets/flowerIcon/sun-flower.svg"
 import redArrow from "@/assets/arrow/red-arrow.svg"
 import blueArrow from "@/assets/arrow/blue-arrow.svg"
 import request from "@/api/request.ts";
@@ -24,18 +25,23 @@ const Index = () => {
     const [translateRes, setTranslateRes] = useState('')
     const changeLanguage = () => {
      setCurrentInPutLanguage(currentInPutLanguage ==='en' ? 'zh' : 'en' )
-        // bug?
-        setTranslateParams({...translateParams,
-            from: translateParams.from ==='en' ? 'zh' : 'en',
-            to: translateParams.to ==='zh' ? 'en' : 'zh',
+        setTranslateParams((prevParams) => ({
+            ...prevParams,
+            from: prevParams.from === 'en' ? 'zh' : 'en',
+            to: prevParams.to === 'zh' ? 'en' : 'zh',
             src_text: ''
-        })
+        }));
+
 
 
     }
     const onTranslate = async () => {
+        if(!translateParams.src_text.trim()) return
         const res = await request<TranslateResult>('https://api.niutrans.com/NiuTransServer/translation', 'GET', translateParams)
         setTranslateRes(res.tgt_text)
+    }
+    const onCopyResult =  () => {
+        navigator.clipboard.writeText(translateRes)
     }
 
     return (
@@ -58,8 +64,11 @@ const Index = () => {
                     <img className={'arrow-icon'} src={blueArrow}/>
                     <img className={'arrow-icon'} src={redArrow}/>
                 </div>
-                <div>
+                <div className={'result-block'}>
                     <input className={'result-input'} value={translateRes} disabled></input>
+                    <div className={'icon-container'} onClick={() => onCopyResult()}>
+                        <img src={sunFlower} className={'copy-icon'}/>
+                    </div>
                 </div>
             </div>
         </div>

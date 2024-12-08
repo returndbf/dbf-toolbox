@@ -1,12 +1,13 @@
 import React, {LegacyRef} from 'react';
 
 import request from "@/api/request.ts";
-import {message} from 'antd';
+
 
 import 'qweather-icons/font/qweather-icons.css'
 import "./index.css"
 import rainbowFlower from "@/assets/flowerIcon/rainbow-flower.svg"
-import WeatherContainer from "@/entrypoints/popup/weather/WeatherContainer.tsx";
+import WeatherContainer from "@/entrypoints/popup/weather/components/WeatherContainer.tsx";
+import Accordion from "@/entrypoints/popup/weather/components/Accordion.tsx";
 
 export interface LocationData {
     "code": string,
@@ -82,7 +83,7 @@ interface DailyWeatherDataRes extends WeatherRes {
 
 const Index = () => {
     const key = '0394034be5e54054bf95007e205ed377'
-    const [messageApi] = message.useMessage();
+
 
     const [position, setPosition] = useState({
         longitude: 0,//经度
@@ -132,41 +133,50 @@ const Index = () => {
             });
         }, function (error) {
             // console.error('Error Code = ' + error.code + ' - ' + error.message);
-            messageApi.error('获取地理位置失败')
+
             console.log(error)
         });
     }, [])
-    const changeImg = ()=>{
+    const changeImg = () => {
 
-        if(currentShowDaily === "1"){
+        if (currentShowDaily === "1") {
             setIsThree(true)
-            setTimeout(()=>{
+            setTimeout(() => {
                 setCurrentShowDaily('3')
-            },450)
-        }else{
+            }, 460)
+        } else {
             setIsThree(false)
-            setTimeout(()=>{
+            setTimeout(() => {
                 setCurrentShowDaily('1')
-            },500)
+            }, 460)
         }
-
-
 
 
     }
     return (
         <div className={'weather-container'}>
-            <div className={'switch-img'} onClick={changeImg}>
-                    <img className={[isThree ? 'scrolled2three-img':'scrolled2one-img',currentShowDaily === '3'?'threeDay-img':'oneDay-img'].join(' ')} style={{  width: '20px'}} src={rainbowFlower}  alt={''}/>
+            <div className={''}>
+                <img
+                    className={[isThree ? 'scrolled2three-img' : 'scrolled2one-img', currentShowDaily === '3' ? 'threeDay-img' : 'oneDay-img',"switch-img"].join(' ')}
+                    style={{width: '20px'}} src={rainbowFlower} alt={''}  onClick={changeImg}/>
             </div>
             {
-              isThree?<>
-                  {
-                      threeDaysWeather?.map(weatherData => {
-                          return <WeatherContainer weatherData={weatherData} fullPosition={fullPosition!}/>
-                      })
-                  }
-              </>:<WeatherContainer weatherData={weatherData!} fullPosition={fullPosition!}/>
+                isThree ? <>
+                    {
+                        threeDaysWeather?.map(weatherData => {
+                            return <>
+                                <Accordion title={weatherData.fxDate}>
+                                    <WeatherContainer weatherData={weatherData} fullPosition={fullPosition!}/>
+                                </Accordion>
+                            </>
+
+                        })
+                    }
+                </> : <>
+                    <Accordion title={weatherData!?.fxDate}> <WeatherContainer weatherData={weatherData!}
+                                                                 fullPosition={fullPosition!}/></Accordion>
+
+                </>
             }
 
 

@@ -6,6 +6,8 @@
 
 .switch-img {
     width: 20px;
+    cursor: pointer;
+    margin: 5px;
 }
 
 .scrolled2three-img{
@@ -44,7 +46,9 @@
 
     }
 }
+.weather-cards{
 
+}
 .weather-cards > div {
     width: 90%;
     padding: 10px;

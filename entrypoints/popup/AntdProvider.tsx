@@ -3,7 +3,7 @@ import {ConfigProvider} from "antd";
 
 import router from "@/router";
 import {ThemeContext} from "@/context/theme.tsx";
-import Nav from "@/entrypoints/popup/Nav";
+
 import {RouterProvider} from "react-router-dom";
 
 const AntdProvider = () => {
