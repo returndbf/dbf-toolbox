@@ -1,0 +1,19 @@
+.eyeDropper-container{
+    display: flex;
+    flexDirection:column;
+    align-items: center
+}
+
+button{
+    border:none;
+    border-radius: 20px;
+    width: 120px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 1px 4px 3px gainsboro;
+}
+button:active{
+    top: 2px;
+}

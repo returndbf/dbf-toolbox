@@ -1,26 +1,28 @@
 import React, {useState} from 'react';
-import {Button, message} from "antd";
+import "./index.css"
+import {ThemeContext} from "@/context/theme.tsx";
 
 const Index = () => {
     const [curColor, setCurColor] = useState('');
+    const {themeColor} = useContext(ThemeContext);
     const open = () => {
         // @ts-ignore
         const eyeDropper = new EyeDropper();
         eyeDropper
             .open()
-            .then((result: {sRGBHex :string}) => {
+            .then((result: { sRGBHex: string }) => {
                 console.log(result);
                 setCurColor(result.sRGBHex);
             })
-            .catch(async (e:any) => {
-               await message.error('使用取色器失败');
+            .catch(async (e: any) => {
+
             });
     }
     return (
         <>
-            <div style={{display: 'flex',justifyContent: 'space-between',alignItems: 'center'}}>
-            <Button  onClick={open} type="primary">打开拾色器</Button>
-            <div style={{width:30,height:30,backgroundColor:curColor}}></div>
+            <div className={'eyeDropper-container'}>
+                <button onClick={open} style={{backgroundColor: themeColor}}>打开拾色器</button>
+                <div style={{width: 30, height: 30, backgroundColor: curColor}}></div>
             </div>
         </>
     );

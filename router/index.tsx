@@ -9,8 +9,8 @@ export default createHashRouter([
         path: "/",
         element: <Nav/>,
     },
-    ...TOOL_MAP.map(({name,path,element}, index) => {
-        return {path,element:<Layout  title={name}>{element}</Layout>};
+    ...TOOL_MAP.map(({name,path,icon,element}, index) => {
+        return {path,element:<Layout  title={name} icon={icon}>{element}</Layout>};
     }),
     {
 
