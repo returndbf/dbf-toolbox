@@ -25,7 +25,7 @@ const Index = () => {
                 <span style={{
                     transition: ' opacity 0.5s ease-in',
                     opacity: name === curSelectedColor ? 1 : 0,
-                    color: '#5d3131',
+                    color: 'white',
                     lineHeight: '50px'
                 }}> {name}</span>
                         </div>

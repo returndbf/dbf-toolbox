@@ -3,8 +3,8 @@ import "./index.css"
 import {ThemeContext} from "@/context/theme.tsx";
 
 const Index = () => {
-    const [curColor, setCurColor] = useState('');
     const {themeColor} = useContext(ThemeContext);
+    const [curColor, setCurColor] = useState(themeColor);
     const open = () => {
         // @ts-ignore
         const eyeDropper = new EyeDropper();
@@ -18,11 +18,18 @@ const Index = () => {
 
             });
     }
+    const copyColor = ()=>{
+        navigator.clipboard.writeText(curColor)
+    }
     return (
         <>
             <div className={'eyeDropper-container'}>
                 <button onClick={open} style={{backgroundColor: themeColor}}>打开拾色器</button>
-                <div style={{width: 30, height: 30, backgroundColor: curColor}}></div>
+                <div className={'color-result'} style={{backgroundColor: curColor}} onClick={copyColor}>
+                    <span className={'color-text'} style={{
+                        transition: ' opacity 0.5s ease-in',
+                    }}> {curColor}</span>
+                </div>
             </div>
         </>
     );
