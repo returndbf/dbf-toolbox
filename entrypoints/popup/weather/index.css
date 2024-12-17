@@ -1,0 +1,64 @@
+.weather-container {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.switch-img {
+    width: 20px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.scrolled2three-img{
+    animation: scrolled2three 0.5s linear infinite;
+    animation-iteration-count: 1;
+}
+.scrolled2one-img{
+    animation: scrolled2one 0.5s linear infinite;
+    animation-iteration-count: 1;
+}
+.threeDay-img{
+    margin-left: 80vw;
+}
+.oneDay-img{
+    margin-left: 0;
+}
+@keyframes scrolled2three{
+    from {
+        transform: translateX(0) rotate(0) ;
+
+    }
+
+    to {
+        transform:translateX(80vw) rotate(360deg)  ;
+
+    }
+}
+@keyframes scrolled2one{
+    from {
+        transform: translateX(0) rotate(0) ;
+    }
+    to {
+        transform:translateX(-80vw) rotate(360deg)  ;
+    }
+}
+.weather-cards{
+
+}
+.weather-cards > div {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #fff5e5;
+    transition: all 0.6s ease;
+    margin-bottom: 2px;
+    font-size: 13px;
+    color: #292929;
+}
+
+.weather-cards > div:hover {
+    box-shadow: 1px 1px 2px var(--cur-color);
+    text-shadow: 1px 1px 1px #ffe5e5;
+
+}

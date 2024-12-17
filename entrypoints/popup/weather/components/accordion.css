@@ -1,0 +1,62 @@
+.accordion-head {
+    display: flex;
+    align-items: center;
+    background: var(--cur-color);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px 0;
+    width: 95%;
+    height: 20px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+.accordion-head:hover{
+    box-shadow: 2px 2px 5px #ffe5e5;
+}
+.panel-arrow-img {
+    width: 20px;
+    transition: all 0.2s ease;
+}
+
+.activate-panel {
+    transition: all 0.2s ease;
+    transform: rotate(270deg);
+    transform-origin: center;
+}
+
+.deactivate-panel {
+    transition: all 0.2s ease;
+    transform: rotate(180deg);
+    transform-origin: center;
+}
+
+.content {
+ position: relative;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+
+}
+
+@keyframes fadeIn {
+    to {
+        position: relative;
+
+        opacity: 1;
+        display: none;
+    }
+}
+
+.empty {
+    transform: translateY(0px);
+    opacity: 1;
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+        display: none;
+    }
+}

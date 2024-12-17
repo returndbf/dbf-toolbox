@@ -1,0 +1,29 @@
+.detail-root{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards ;
+}
+@keyframes fadeIn {
+    to{
+        opacity: 1;
+    }
+}
+.detail-grid {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(4, 0fr);
+}
+.color-detail  {
+    width: 50px;
+    height: 50px;
+    background-image: url("@/assets/colorBackground.png");
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,41 @@
+.nav-card{
+    transition: box-shadow 0.8s ease;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+.nav-card:hover {
+    box-shadow: 1px 1px 10px var(--cur-color);
+}
+.title-icon{
+    width: 20px;
+    margin-left: 10px;
+}
+.img-scroll{
+    animation: scrollImg 1s linear ;
+    animation-iteration-count: 1;
+}
+@keyframes scrollImg{
+    from {
+        transform: rotate(0) ;
+
+    }
+
+    to {
+        transform: rotate(360deg)  ;
+
+    }
+}
+.nav-footer{
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    transition: all 0.5s ease-in-out;
+    user-select: none;
+}
