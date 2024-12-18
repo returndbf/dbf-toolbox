@@ -2,7 +2,7 @@ import React from 'react';
 
 import "./index.css"
 import {useNavigate} from "react-router";
-import Divider from "@/entrypoints/components/Divider.tsx";
+import Divider from "@/entrypoints/components/Divider/Divider";
 import {ThemeContext} from "@/context/theme.tsx";
 
 const colorMap: Array<{ colorValue: string, name: string }> = [

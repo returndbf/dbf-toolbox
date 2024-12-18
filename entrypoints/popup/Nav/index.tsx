@@ -4,7 +4,7 @@ import {useNavigate} from "react-router";
 import "./index.css"
 import {TOOL_MAP} from "@/constant/TOOL_MAP.tsx";
 import {ThemeContext} from "@/context/theme.tsx";
-import Divider from "@/entrypoints/components/Divider.tsx";
+import Divider from "@/entrypoints/components/Divider/Divider";
 
 const Index = () => {
     const navigate = useNavigate();

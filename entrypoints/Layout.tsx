@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react';
 import {useNavigate} from 'react-router-dom';
 import back from "@/assets/back.svg"
-import Divider from "@/entrypoints/components/Divider.tsx";
+import Divider from "@/entrypoints/components/Divider/Divider";
 import {ThemeContext} from "@/context/theme.tsx";
 
 
