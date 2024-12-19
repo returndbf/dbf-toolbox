@@ -62,3 +62,17 @@
     text-shadow: 1px 1px 1px #ffe5e5;
 
 }
+.custom-city-input{
+    width:150px;
+    border-radius: 20px;
+    border:1px solid var(--cur-color);
+    height: 25px;
+    text-indent: 14px;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+.custom-city-input:focus{
+    outline: none;
+    border: 1px solid var(--cur-color);
+    box-shadow: 0px 2px 5px #f3cdcd;
+}

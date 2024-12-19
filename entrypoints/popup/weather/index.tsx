@@ -8,7 +8,7 @@ import "./index.css"
 import rainbowFlower from "@/assets/flowerIcon/rainbow-flower.svg"
 import WeatherContainer from "@/entrypoints/popup/weather/components/WeatherContainer.tsx";
 import Accordion from "@/entrypoints/popup/weather/components/Accordion.tsx";
-
+import Modal from "@/entrypoints/components/Modal/Modal.tsx"
 export interface LocationData {
     "code": string,
     "location": Array<{
@@ -93,6 +93,8 @@ const Index = () => {
     const [weatherData, setWeatherData] = useState<DailyWeatherData>();
     const [isThree, setIsThree] = useState(false)
     const [threeDaysWeather, setThreeDaysWeather] = useState<DailyWeatherDataRes['daily']>();
+    const [isShowCustomModal,setIsShowCustomModal] = useState(false)
+    const [allScroll,setAllowScroll] = useState(true)
 
     const onRequestLocationData = async (longitude: number, latitude: number) => {
         const res = await request<LocationData>(`${import.meta.env.VITE_BACKEND_URL}/reqLocation`, 'GET', {
@@ -157,6 +159,9 @@ const Index = () => {
                     className={[isThree ? 'scrolled2three-img' : 'scrolled2one-img', currentShowDaily === '3' ? 'threeDay-img' : 'oneDay-img',"switch-img"].join(' ')}
                     style={{width: '20px'}} src={rainbowFlower} alt={''}  onClick={changeImg}/>
             </div>
+            <Modal open={isShowCustomModal} title='自定义城市' onClose={()=>setIsShowCustomModal(false)} onConfirm={()=>setIsShowCustomModal(false)}>
+                <input className='custom-city-input' type='text' placeholder='请输入城市名' onChange={()=>{}}></input>
+            </Modal>
             {
                 isThree ? <>
                     {
