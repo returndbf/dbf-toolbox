@@ -1,11 +1,11 @@
 import React from 'react';
 import type {DailyWeatherData,LocationData} from "../index.tsx"
-const WeatherContainer = ({weatherData,fullPosition}:{weatherData:DailyWeatherData,fullPosition:LocationData}) => {
+const WeatherContainer = ({weatherData,fullPosition}:{weatherData:DailyWeatherData,fullPosition:LocationData[]}) => {
     return (
 
             <div className={'weather-cards'}>
                 {/*<div>预报日期:{weatherData?.fxDate}</div>*/}
-                <div>所在位置:{`${fullPosition?.location?.[0]?.adm1} - ${fullPosition?.location?.[0]?.adm2} -${fullPosition?.location?.[0]?.name}`}</div>
+                <div>所在位置:{`${fullPosition?.[0]?.adm1} - ${fullPosition?.[0]?.adm2} -${fullPosition?.[0]?.name}`}</div>
                 <div>温度区间:{weatherData?.tempMin}-{weatherData?.tempMax}
                     <span>{weatherData?.textDay}<i className={`qi-${weatherData?.iconDay}`}></i></span>
                 </div>
