@@ -1,3 +1,9 @@
-# WXT + React
+## frontend
+`WXT + React + Typescript`
 
-This template should help get you started developing with React in WXT.
+## backend
+ `Nodejs + Expressjs`
+
+
+
+
