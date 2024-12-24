@@ -2,7 +2,7 @@
   "name": "dbf-toolbox",
   "description": "simple and beautiful toolbox ,designed by dbf",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "license": "MIT",
   "scripts": {
