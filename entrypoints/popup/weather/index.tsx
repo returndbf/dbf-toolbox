@@ -65,6 +65,13 @@ interface fullWeatherData {
     weatherData: WeatherRes,
     position: LocationDataRes
 }
+interface IpDataRes {
+    "ret": "ok" | string,
+    "data": {
+        "ip": string,
+        "location": string[]
+    }
+}
 
 const Index = () => {
 
@@ -80,13 +87,16 @@ const Index = () => {
     const [threeDaysWeather, setThreeDaysWeather] = useState<WeatherRes['daily']>();
     const [isShowCustomModal, setIsShowCustomModal] = useState(false)
     const [allScroll, setAllowScroll] = useState(true)
+    const onRequsetIp = async () => {
+        return request<IpDataRes>('https://myip.ipip.net/json', 'GET')
+    }
 
-
-    const onRequestWeather = async (longitude: number, latitude: number) => {
+    const onRequestWeather = async (location:string,adm:string) => {
         const threeDaysDataRes = await request<fullWeatherData>(`${import.meta.env.VITE_BACKEND_URL}/reqWeather`, 'GET', {
-            location: `${longitude},${latitude}`,
+            location,
+            adm
         })
-        const {weatherData, position} = threeDaysDataRes
+        const { weatherData, position } = threeDaysDataRes
         if (weatherData.code === '200') {
             setThreeDaysWeather(weatherData.daily)
             setWeatherData(weatherData.daily[0])
@@ -94,19 +104,36 @@ const Index = () => {
         }
 
     }
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            const {longitude, latitude} = position.coords;
-            setPosition({...position, longitude: position.coords.longitude, latitude: position.coords.latitude})
-            onRequestWeather(longitude, latitude)
-        }, function (error) {
 
-            console.log(error)
-        }, {
-            enableHighAccuracy: true, // 提高精度
-            timeout: 10000,          // 超时时间
-            maximumAge: 0            // 禁用缓存
-        });
+    // const onRequestWeather = async (longitude: number, latitude: number) => {
+    //     const threeDaysDataRes = await request<fullWeatherData>(`${import.meta.env.VITE_BACKEND_URL}/reqWeather`, 'GET', {
+    //         location: `${longitude},${latitude}`,
+    //     })
+    //     const { weatherData, position } = threeDaysDataRes
+    //     if (weatherData.code === '200') {
+    //         setThreeDaysWeather(weatherData.daily)
+    //         setWeatherData(weatherData.daily[0])
+    //         setFullPosition(position.location)
+    //     }
+
+    // }
+    useEffect(() => {
+        // navigator.geolocation.getCurrentPosition(function (position) {
+        //     const { longitude, latitude } = position.coords;
+        //     setPosition({ ...position, longitude: position.coords.longitude, latitude: position.coords.latitude })
+        //     onRequestWeather(longitude, latitude)
+        // }, function (error) {
+
+        //     console.log(error)
+        // }, {
+        //     enableHighAccuracy: true, // 提高精度
+        //     timeout: 10000,          // 超时时间
+        //     maximumAge: 0            // 禁用缓存
+        // });
+        onRequsetIp().then(ipData=>{
+            const [country,adm,location] = ipData?.data?.location
+            onRequestWeather(location,adm)
+        })
     }, [])
     const changeImg = () => {
 
@@ -129,10 +156,10 @@ const Index = () => {
             <div className={''}>
                 <img
                     className={[isThree ? 'scrolled2three-img' : 'scrolled2one-img', currentShowDaily === '3' ? 'threeDay-img' : 'oneDay-img', "switch-img"].join(' ')}
-                    style={{width: '20px'}} src={rainbowFlower} alt={''} onClick={changeImg}/>
+                    style={{ width: '20px' }} src={rainbowFlower} alt={''} onClick={changeImg} />
             </div>
             <Modal open={isShowCustomModal} title='自定义城市' onClose={() => setIsShowCustomModal(false)}
-                   onConfirm={() => setIsShowCustomModal(false)}>
+                onConfirm={() => setIsShowCustomModal(false)}>
                 <input className='custom-city-input' type='text' placeholder='请输入城市名' onChange={() => {
                 }}></input>
             </Modal>
@@ -142,7 +169,7 @@ const Index = () => {
                         threeDaysWeather?.map(weatherData => {
                             return <>
                                 <Accordion title={weatherData.fxDate}>
-                                    <WeatherContainer weatherData={weatherData} fullPosition={fullPosition!}/>
+                                    <WeatherContainer weatherData={weatherData} fullPosition={fullPosition!} />
                                 </Accordion>
                             </>
 
@@ -150,7 +177,7 @@ const Index = () => {
                     }
                 </> : <>
                     <Accordion title={weatherData!?.fxDate}> <WeatherContainer weatherData={weatherData!}
-                                                                               fullPosition={fullPosition!}/></Accordion>
+                        fullPosition={fullPosition!} /></Accordion>
 
                 </>
             }
