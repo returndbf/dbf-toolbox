@@ -5,7 +5,7 @@ import common from "@/assets/translate/common.svg"
 import cry from "@/assets/translate/cry.svg"
 import request from "@/api/request.ts";
 import "./index.css"
-import {ThemeContext} from "@/context/theme.tsx";
+import { ThemeContext } from "@/context/theme.tsx";
 
 interface TranslateResult {
     from: "zh"
@@ -15,14 +15,14 @@ interface TranslateResult {
 
 const Index = () => {
     const [currentInPutLanguage, setCurrentInPutLanguage] = useState<'en' | 'zh'>('zh')
-    const {themeColor, toggleTheme} = useContext(ThemeContext);
+    const { themeColor, toggleTheme } = useContext(ThemeContext);
     const [translateParams, setTranslateParams] = useState({
         from: 'zh',
         to: 'en',
         src_text: ''
     })
 
-    const languageMap = {'en': 'input here', 'zh': '在此输入'}
+    const languageMap = { 'en': 'input here', 'zh': '在此输入' }
     const [translateRes, setTranslateRes] = useState('')
     const changeLanguage = () => {
         setCurrentInPutLanguage(currentInPutLanguage === 'en' ? 'zh' : 'en')
@@ -56,27 +56,28 @@ const Index = () => {
             <div className={'box'}>
                 <div className={'search-block'}>
                     <input className={'translate-input'}
-                           style={{border: `2px solid ${themeColor} `}}
-                           placeholder={languageMap[currentInPutLanguage]}
-                           onChange={(e) => setTranslateParams({...translateParams, src_text: e.target.value})}
-                           value={translateParams.src_text}
-                           onKeyDown={handleKeyDown}
+                        autoFocus
+                        style={{ border: `2px solid ${themeColor} ` }}
+                        placeholder={languageMap[currentInPutLanguage]}
+                        onChange={(e) => setTranslateParams({ ...translateParams, src_text: e.target.value })}
+                        value={translateParams.src_text}
+                        onKeyDown={handleKeyDown}
                     />
                     <div className={'icon-container'} onClick={() => onTranslate()}>
-                        <img src={searchFlower} className={'search-icon'}/>
+                        <img src={searchFlower} className={'search-icon'} />
                     </div>
 
                 </div>
 
                 <div className={'arrow'}
-                     onClick={changeLanguage}>
-                    <img className={'translate-icon'} src={currentInPutLanguage === 'zh' ? common : cry}/>
+                    onClick={changeLanguage}>
+                    <img className={'translate-icon'} src={currentInPutLanguage === 'zh' ? common : cry} />
                 </div>
                 <div className={'result-block'}>
                     <input className={'result-input'} value={translateRes} disabled
-                           style={{border: `2px solid ${themeColor} `}}></input>
+                        style={{ border: `2px solid ${themeColor} ` }}></input>
                     <div className={'icon-container'} onClick={() => onCopyResult()}>
-                        <img src={sunFlower} className={'copy-icon'}/>
+                        <img src={sunFlower} className={'copy-icon'} />
                     </div>
                 </div>
             </div>
