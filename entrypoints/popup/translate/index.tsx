@@ -22,6 +22,12 @@ const Index = () => {
         src_text: ''
     })
 
+    const containerKeyDown = (event: { key: string,ctrlKey:boolean })=>{
+        if(event.ctrlKey && event.key === 'q'){
+            changeLanguage()
+        }
+    }
+
     const languageMap = { 'en': 'input here', 'zh': '在此输入' }
     const [translateRes, setTranslateRes] = useState('')
     const changeLanguage = () => {
@@ -52,7 +58,7 @@ const Index = () => {
 
     return (
 
-        <div className={'container'}>
+        <div className={'container'}  onKeyDown={containerKeyDown}  tabIndex={0 }>
             <div className={'box'}>
                 <div className={'search-block'}>
                     <input className={'translate-input'}
